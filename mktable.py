@@ -19,7 +19,7 @@ f = open( oname, "w" )
 assert f
 
 f.write( "#define NUMP %d\n" % ( sz*2, ) )
-f.write( "static float twins[NUMP] __attribute__ ((aligned(32))) = {\n" )
+f.write( "static double twins[NUMP] __attribute__ ((aligned(32))) = {\n" )
 
 for r in range(rows) :
 	f.write( "  " )
