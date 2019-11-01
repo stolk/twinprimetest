@@ -11,3 +11,13 @@ Scratching an intellectual curiosity, sparked by
 * Python3
 * Sympy
 
+## Results
+
+I find that it converges very slowly:
+
+* At 8192 pairs (from the first 1M primes or so,) I would get 1.710823
+* At 813368 pairs (from the first 200M primes,) I would get 1.761476
+
+## Future Work
+
+* Find a public dataset of the first 
