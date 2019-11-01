@@ -19,6 +19,7 @@ I find that it converges very slowly:
 * At 813368 pairs (from primes below 200M): 1.761476
 * At 813368 pairs, adding in reversed order: 1.764010
 * At 813368 pairs, adding reversed, double prec: 1.764010
+* At 813368 pairs, scalar operations, dp: 1.764010
 
 ## Future Work
 

@@ -2,9 +2,11 @@
 #include <stdio.h>
 #include <immintrin.h>
 
-#define DP
+#undef	SPVEC
+#undef	DPVEC
+#define	DPSCALAR
 
-#if defined(DP)
+#if defined(DPVEC) || defined(DPSCALAR)
 #	include "table_dp.h"
 #else
 #	include "table_sp.h"
@@ -13,7 +15,17 @@
 
 #undef  USERECIP
 
-void doubleprec(const __m256* reader)
+void double_prec_scalar(double* reader)
+{
+	double accum = 0.0;
+	for ( int idx=NUMP-1; idx>=0; idx-- )
+	{
+		accum += (1.0 / reader[idx]);
+	}
+	printf( "Sum: %lf\n", accum );
+}
+
+void double_prec_vector(const __m256* reader)
 {
 	__m256 accum = _mm256_setzero_ps();
 
@@ -42,7 +54,7 @@ void doubleprec(const __m256* reader)
 }
 
 
-void singleprec(const __m256* reader)
+void single_prec_vector(const __m256* reader)
 {
 	__m256 accum = _mm256_setzero_ps();
 
@@ -68,18 +80,19 @@ void singleprec(const __m256* reader)
 	const float total = res[0]+res[1]+res[2]+res[3]+res[4]+res[5]+res[6]+res[7];
 
 	printf( "Sum: %f\n", total );
-
 }
 
 
 int main( int argc, char* argv[] )
 {
-#if defined(DP)
+#if defined(DPVEC)
 	const __m256* reader = (const __m256*) twins_dp;
-	doubleprec( reader );
-#else
+	double_prec_vector( reader );
+#elif defined(SPVEC)
 	const __m256* reader = (const __m256*) twins_sp;
-	singleprec( reader );
+	single_prec_vector( reader );
+#elif defined(DPSCALAR)
+	double_prec_scalar( twins_dp );
 #endif
 	return 0;
 }
