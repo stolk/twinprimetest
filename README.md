@@ -21,6 +21,8 @@ I find that it converges very slowly:
 * At 813368 pairs, adding reversed, double prec: 1.764010
 * At 813368 pairs, scalar operations, dp: 1.764010
 
-## Future Work
+So I switched to my own C implementation for sieving primes.
 
-* Find a public dataset of the first 
+* At 79556299 pairs: 1.793023
+
+
