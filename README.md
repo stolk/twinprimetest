@@ -17,6 +17,7 @@ I find that it converges very slowly:
 
 * At 8192 pairs (from primes below 1M or so,) I would get 1.710823
 * At 813368 pairs (from primes below 200M,) I would get 1.761476
+* At 813368 pairs, adding in reversed order, I would get  1.764010
 
 ## Future Work
 

@@ -4,8 +4,13 @@ import sys
 
 import sympy
 
-l = [ n for n in sympy.primerange(1,1002750) if sympy.isprime(n+2) ]
+#limit=1002750	# This will give 8192 twins.
+limit=200000000	# This will give X twins.
+
+l = [ n for n in sympy.primerange(1,limit) if sympy.isprime(n+2) ]
 sz = len( l )
+rows = int( sz / 8 )
+sz = rows * 8
 
 print( "Generated %d twins." % ( sz, ) )
 
@@ -15,7 +20,6 @@ assert f
 
 f.write( "#define NUMP %d\n" % ( sz*2, ) )
 f.write( "static float twins[NUMP] __attribute__ ((aligned(32))) = {\n" )
-rows = int( sz / 8 )
 
 for r in range(rows) :
 	f.write( "  " )

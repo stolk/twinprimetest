@@ -14,9 +14,11 @@ int main( int argc, char* argv[] )
 
 	__m256 accum = _mm256_setzero_ps();
 
-	for ( int idx=0; idx<NUMP; idx+=8 )
+	const int numblocks = NUMP/8;
+
+	for ( int idx=numblocks-1; idx>=0; idx-- )
 	{
-		const __m256 p8 = *reader++;
+		const __m256 p8 = reader[idx];
 #if defined( USERECIP )
 		// Use 8-way SIMD reciprocal, which is faster.
 		const __m256 r8 = _mm256_rcp_ps( p8 );
